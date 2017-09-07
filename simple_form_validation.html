@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Form Validation using  simple javascript</title>
+</head>
+<body>
+
+	<form>
+		<label for="enter_email">Enter Email</label>
+  		<input id="enter_email" name="email" required>
+
+  		<label for="enter_mobile">Enter Mobile Number</label>
+  		<input id="enter_mobile" name="mobile" required>
+
+  		<label for="enter_msg">Enter your msg</label>
+  		<input id="enter_msg" name="msg" required>
+
+  		<button type="button" onClick="validate()">Submit</button>
+
+	</form>
+	<div>
+		<p id="error_msg"></p> 
+		<p id="show_email"></p>
+		<p id="show_mobile"></p>
+		<p id="show_msg"></p>
+	</div>
+
+
+</body>
+
+
+	<script type="text/javascript">
+		var email_id = document.getElementById('enter_email');
+		var mobile = document.getElementById('enter_mobile');
+		var msg = document.getElementById('enter_msg');
+		var show_error = document.getElementById('error_msg');
+
+		function validate(){
+			show_error.innerHTML = "" ;
+			msg.innerHTML = "" ;
+			mobile.innerHTML = "" ;
+			email_id.innerHTML = "" ;
+			var check = check_email() && check_mobile() && check_msg()
+			if(check){
+				show_details();
+			}
+			else{
+				show_error.innerHTML += "<br>Fields is/are wrongly entered!" ;
+			}
+
+		}
+
+		function check_email(){
+			
+			var check = (email_id.value.includes('@') && email_id.value.includes('@'))
+			console.log(check);
+			show_error.innerHTML += (check ? " ": "<br>Email is wrongly entered.")
+			return check
+		}
+
+		function check_mobile(){
+			var check = (/^\d{10}$/).test(mobile.value);
+			show_error.innerHTML += (check ? " ": "<br>Mobile is wrongly entered.")
+			return check
+		}
+
+		function check_msg(){
+			var check = (msg.value.length != 0);
+			show_error.innerHTML += (check ? " ": "<br>Msg is empty.")
+			return check;
+		}
+
+		function show_details() {
+			console.log(email_id.value);
+			show_email.textContent = email_id.value ;
+
+			var show_mobile = document.getElementById('show_mobile');
+			console.log(mobile.value);
+			show_mobile.textContent = mobile.value ;
+
+			
+			var show_msg = document.getElementById('show_msg');
+			console.log(msg.value);
+			show_msg.textContent = msg.value ;
+		
+
+		}
+	</script>
+</html>
